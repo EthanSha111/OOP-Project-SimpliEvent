@@ -11,10 +11,12 @@ public class BrowsePage extends JFrame {
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
 
-    public BrowsePage() {
+    private UserClss loggeduser;
+
+    public BrowsePage(UserClss user) {
         // Sample events for demonstration
         events = createSampleEvents();
-
+        this.loggeduser = user;
         // Initialize UI components
         eventsPanel = new JPanel();
         eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
@@ -28,7 +30,7 @@ public class BrowsePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close this window
-                new HomePage(); // Open the HomePage
+                new HomePage(loggeduser); // Open the HomePage
             }
         });
         sortByRatingButton.addActionListener(new ActionListener() {
@@ -77,7 +79,7 @@ public class BrowsePage extends JFrame {
             eventPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     dispose(); // Close BrowsePage
-                    new EventDetailsPage(event,"browsepage"); // Open EventDetailsPage with the selected eve
+                    new EventDetailsPage(event,"browsepage",loggeduser); // Open EventDetailsPage with the selected eve
                 }
             });
 
@@ -104,7 +106,5 @@ public class BrowsePage extends JFrame {
         return sampleEvents;
     }
 
-    public static void main(String[] args) {
-        new BrowsePage();
-    }
+
 }
