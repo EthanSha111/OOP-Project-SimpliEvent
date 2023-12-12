@@ -7,10 +7,7 @@ public class LoginPage extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
 
-    // Array of sample users
-    private UserClss[] users = {
-            new UserClss("me", "sample@example.com", "123")
-    };
+    public static UserBook userBook = new UserBook();
 
     public LoginPage() {
         // Initialize components
@@ -40,27 +37,19 @@ public class LoginPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
-                if (authenticate(username, password)) {
+                if (userBook.authenticate(username, password)) {
                     JOptionPane.showMessageDialog(LoginPage.this, "Login Successful!");
-                    // Navigate to HomePage
                     LoginPage.this.setVisible(false); // Hide the login page
-                    new HomePage(); // Open the HomePage
+                    UserClss loggedInUser = userBook.getUser(username);
+                    new HomePage(loggedInUser); // Open UserProfilePage with the logged-in user
                 } else {
                     JOptionPane.showMessageDialog(LoginPage.this, "Invalid Credentials");
                 }
             }
         });
+
     }
 
-    // Method to authenticate user
-    private boolean authenticate(String username, String password) {
-        for (UserClss user : users) {
-            if (user.getUsername().equals(username) && user.checkPassword(password)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public static void main(String[] args) {
         new LoginPage();
