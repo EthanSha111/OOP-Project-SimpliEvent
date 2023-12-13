@@ -1,5 +1,5 @@
 import java.util.*;
-public class UserClss {
+public class User {
     // User attributes
     private String username;
     private String email;
@@ -8,7 +8,7 @@ public class UserClss {
     private List<Event> savedEvents; // Storing Event objects
 
     // Constructor
-    public UserClss(String username, String email, String password) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;

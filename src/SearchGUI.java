@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 public class SearchGUI extends JFrame {
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
-    private UserClss loggeduser;
+    private User loggeduser;
 
-    public SearchGUI(List<Event> events, UserClss user) {
+    public SearchGUI(List<Event> events, User user) {
         // UI Components
         this.loggeduser = user;
         JTextField eventNameField = new JTextField(20);

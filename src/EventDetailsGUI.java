@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 public class EventDetailsGUI extends JFrame {
-    private UserClss loggeduser;
-    public EventDetailsGUI(Event event, String sourcePage, UserClss user) {
+    private User loggeduser;
+    public EventDetailsGUI(Event event, String sourcePage, User user) {
         // Initialize UI components
         JLabel titleLabel = new JLabel(event.getTitle());
         JTextArea detailsArea = new JTextArea(event.getFullDetails());

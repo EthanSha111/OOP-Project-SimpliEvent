@@ -8,9 +8,9 @@ public class HomeGUI extends JFrame {
     private JButton notificationsButton;
     private JButton userProfileButton;
     public JPanel mainPanel; // Main container panel
-    private UserClss loggeduser;
+    private User loggeduser;
 
-    public HomeGUI(UserClss user) {
+    public HomeGUI(User user) {
         // Initialize the main panel and set its layout
         this.loggeduser = user;
         mainPanel = new JPanel();

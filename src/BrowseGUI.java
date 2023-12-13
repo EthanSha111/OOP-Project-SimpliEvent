@@ -11,9 +11,9 @@ public class BrowseGUI extends JFrame {
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
 
-    private UserClss loggeduser;
+    private User loggeduser;
 
-    public BrowseGUI(UserClss user) {
+    public BrowseGUI(User user) {
         // Sample events for demonstration
         events = createSampleEvents();
         this.loggeduser = user;
