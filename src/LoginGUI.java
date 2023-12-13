@@ -2,14 +2,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginPage extends JFrame {
+public class LoginGUI extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
 
     public static UserBook userBook = new UserBook();
 
-    public LoginPage() {
+    public LoginGUI() {
         // Initialize components
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
@@ -38,12 +38,12 @@ public class LoginPage extends JFrame {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 if (userBook.authenticate(username, password)) {
-                    JOptionPane.showMessageDialog(LoginPage.this, "Login Successful!");
-                    LoginPage.this.setVisible(false); // Hide the login page
+                    JOptionPane.showMessageDialog(LoginGUI.this, "Login Successful!");
+                    LoginGUI.this.setVisible(false); // Hide the login page
                     UserClss loggedInUser = userBook.getUser(username);
-                    new HomePage(loggedInUser); // Open UserProfilePage with the logged-in user
+                    new HomeGUI(loggedInUser); // Open UserProfilePage with the logged-in user
                 } else {
-                    JOptionPane.showMessageDialog(LoginPage.this, "Invalid Credentials");
+                    JOptionPane.showMessageDialog(LoginGUI.this, "Invalid Credentials");
                 }
             }
         });
@@ -52,6 +52,6 @@ public class LoginPage extends JFrame {
 
 
     public static void main(String[] args) {
-        new LoginPage();
+        new LoginGUI();
     }
 }

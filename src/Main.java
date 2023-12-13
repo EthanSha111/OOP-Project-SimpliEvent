@@ -9,7 +9,7 @@ public class Main {
         // Create and display the login page
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new LoginPage().setVisible(true);
+                new LoginGUI().setVisible(true);
             }
         });
     }

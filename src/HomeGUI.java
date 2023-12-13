@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomePage extends JFrame {
+public class HomeGUI extends JFrame {
     private JButton browseEventsButton;
     private JButton searchButton;
     private JButton notificationsButton;
@@ -10,7 +10,7 @@ public class HomePage extends JFrame {
     public JPanel mainPanel; // Main container panel
     private UserClss loggeduser;
 
-    public HomePage(UserClss user) {
+    public HomeGUI(UserClss user) {
         // Initialize the main panel and set its layout
         this.loggeduser = user;
         mainPanel = new JPanel();
@@ -39,19 +39,19 @@ public class HomePage extends JFrame {
         browseEventsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new BrowsePage(loggeduser); // Open the BrowsePage
+                new BrowseGUI(loggeduser); // Open the BrowsePage
             }
         });
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SearchPage(BrowsePage.createSampleEvents(),loggeduser); // Open the BrowsePage
+                new SearchGUI(BrowseGUI.createSampleEvents(),loggeduser); // Open the BrowsePage
             }
         });
         userProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new UserProfilePage(loggeduser); // Open the BrowsePage
+                new UserProfileGUI(loggeduser); // Open the BrowsePage
             }
         });
         // Similarly, add action listeners for other buttons

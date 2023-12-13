@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-public class EventDetailsPage extends JFrame {
+public class EventDetailsGUI extends JFrame {
     private UserClss loggeduser;
-    public EventDetailsPage(Event event, String sourcePage, UserClss user) {
+    public EventDetailsGUI(Event event, String sourcePage, UserClss user) {
         // Initialize UI components
         JLabel titleLabel = new JLabel(event.getTitle());
         JTextArea detailsArea = new JTextArea(event.getFullDetails());
@@ -20,9 +20,9 @@ public class EventDetailsPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 if ("SearchPage".equals(sourcePage)) {
-                    new SearchPage(BrowsePage.createSampleEvents(),loggeduser); // Go back to SearchPage
+                    new SearchGUI(BrowseGUI.createSampleEvents(),loggeduser); // Go back to SearchPage
                 } else {
-                    new BrowsePage(loggeduser); // Go back to BrowsePage
+                    new BrowseGUI(loggeduser); // Go back to BrowsePage
                 }
             }
         });

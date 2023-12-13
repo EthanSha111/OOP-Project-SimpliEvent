@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class BrowsePage extends JFrame {
+public class BrowseGUI extends JFrame {
     private List<Event> events;
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
 
     private UserClss loggeduser;
 
-    public BrowsePage(UserClss user) {
+    public BrowseGUI(UserClss user) {
         // Sample events for demonstration
         events = createSampleEvents();
         this.loggeduser = user;
@@ -30,7 +30,7 @@ public class BrowsePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close this window
-                new HomePage(loggeduser); // Open the HomePage
+                new HomeGUI(loggeduser); // Open the HomePage
             }
         });
         sortByRatingButton.addActionListener(new ActionListener() {
@@ -79,7 +79,7 @@ public class BrowsePage extends JFrame {
             eventPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     dispose(); // Close BrowsePage
-                    new EventDetailsPage(event,"browsepage",loggeduser); // Open EventDetailsPage with the selected eve
+                    new EventDetailsGUI(event,"browsepage",loggeduser); // Open EventDetailsPage with the selected eve
                 }
             });
 

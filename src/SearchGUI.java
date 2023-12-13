@@ -5,12 +5,12 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchPage extends JFrame {
+public class SearchGUI extends JFrame {
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
     private UserClss loggeduser;
 
-    public SearchPage(List<Event> events, UserClss user) {
+    public SearchGUI(List<Event> events, UserClss user) {
         // UI Components
         this.loggeduser = user;
         JTextField eventNameField = new JTextField(20);
@@ -41,7 +41,7 @@ public class SearchPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close this window
-                new HomePage(loggeduser); // Open the HomePage
+                new HomeGUI(loggeduser); // Open the HomePage
             }
         });
 
@@ -94,7 +94,7 @@ public class SearchPage extends JFrame {
 
         eventPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                new EventDetailsPage(event, "SearchPage",loggeduser); // Open EventDetailsPage with the selected event
+                new EventDetailsGUI(event, "SearchPage",loggeduser); // Open EventDetailsPage with the selected event
             }
         });
 

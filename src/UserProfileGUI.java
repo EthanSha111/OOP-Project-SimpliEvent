@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserProfilePage extends JFrame {
+public class UserProfileGUI extends JFrame {
     private UserClss loggedInUser;
     private JLabel nameLabel;
     private JLabel emailLabel;
@@ -11,7 +11,7 @@ public class UserProfilePage extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;
 
-    public UserProfilePage(UserClss loggedInUser) {
+    public UserProfileGUI(UserClss loggedInUser) {
         this.loggedInUser = loggedInUser;
 
         // UI Components
@@ -46,13 +46,13 @@ public class UserProfilePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new LoginPage();
+                new LoginGUI();
             }
         });
 
         backToMainButton.addActionListener(e -> {
             dispose();
-            new HomePage(loggedInUser);
+            new HomeGUI(loggedInUser);
         });
 
         // Change name action
@@ -61,7 +61,7 @@ public class UserProfilePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 loggedInUser.setUsername(nameField.getText());
                 nameLabel.setText("Account Name: " + loggedInUser.getUsername());
-                JOptionPane.showMessageDialog(UserProfilePage.this, "Name updated successfully!");
+                JOptionPane.showMessageDialog(UserProfileGUI.this, "Name updated successfully!");
                 updateAndLogout();
             }
         });
@@ -72,7 +72,7 @@ public class UserProfilePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 loggedInUser.setEmail(emailField.getText());
                 emailLabel.setText("Account Email: " + loggedInUser.getEmail());
-                JOptionPane.showMessageDialog(UserProfilePage.this, "Email updated successfully!");
+                JOptionPane.showMessageDialog(UserProfileGUI.this, "Email updated successfully!");
                 updateAndLogout();
             }
         });
@@ -82,7 +82,7 @@ public class UserProfilePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loggedInUser.setPassword(new String(passwordField.getPassword()));
-                JOptionPane.showMessageDialog(UserProfilePage.this, "Password updated successfully!");
+                JOptionPane.showMessageDialog(UserProfileGUI.this, "Password updated successfully!");
                 updateAndLogout();
             }
         });
@@ -93,12 +93,12 @@ public class UserProfilePage extends JFrame {
         this.setVisible(true);
     }
     private void updateAndLogout() {
-        UserBook userBook = LoginPage.userBook;
+        UserBook userBook = LoginGUI.userBook;
         userBook.updateUser(loggedInUser);
         logout();
     }
     private void logout() {
         dispose();
-        new LoginPage();
+        new LoginGUI();
     }
 }
