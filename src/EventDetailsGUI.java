@@ -19,9 +19,7 @@ public class EventDetailsGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                if ("SearchPage".equals(sourcePage)) {
-                    new SearchGUI(BrowseGUI.createSampleEvents(),loggeduser); // Go back to SearchPage
-                } else {
+                if ("browsepage".equals(sourcePage)) {
                     new BrowseGUI(loggeduser); // Go back to BrowsePage
                 }
             }

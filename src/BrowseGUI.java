@@ -30,7 +30,6 @@ public class BrowseGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close this window
-                new HomeGUI(loggeduser); // Open the HomePage
             }
         });
         sortByRatingButton.addActionListener(new ActionListener() {

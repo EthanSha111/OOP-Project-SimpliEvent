@@ -52,7 +52,6 @@ public class UserProfileGUI extends JFrame {
 
         backToMainButton.addActionListener(e -> {
             dispose();
-            new HomeGUI(loggedInUser);
         });
 
         // Change name action

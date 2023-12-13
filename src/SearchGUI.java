@@ -41,7 +41,6 @@ public class SearchGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Close this window
-                new HomeGUI(loggeduser); // Open the HomePage
             }
         });
 
