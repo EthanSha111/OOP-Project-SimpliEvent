@@ -40,7 +40,7 @@ public class LoginGUI extends JFrame {
                 if (userBook.authenticate(username, password)) {
                     JOptionPane.showMessageDialog(LoginGUI.this, "Login Successful!");
                     LoginGUI.this.setVisible(false); // Hide the login page
-                    UserClss loggedInUser = userBook.getUser(username);
+                    User loggedInUser = userBook.getUser(username);
                     new HomeGUI(loggedInUser); // Open UserProfilePage with the logged-in user
                 } else {
                     JOptionPane.showMessageDialog(LoginGUI.this, "Invalid Credentials");

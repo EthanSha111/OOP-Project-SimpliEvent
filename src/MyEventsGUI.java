@@ -5,36 +5,21 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchGUI extends JFrame {
+public class MyEventsGUI extends JFrame{
+
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
     private User loggeduser;
 
-    public SearchGUI(List<Event> events, User user) {
+    public MyEventsGUI(List<Event> events, User user){
         // UI Components
         this.loggeduser = user;
-        JTextField eventNameField = new JTextField(20);
-        JTextField venueNameField = new JTextField(20);
-        JButton searchButton = new JButton("Search");
         JButton goBackButton = new JButton("Go Back");
         eventsPanel = new JPanel();
         eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
         scrollPane = new JScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        // Search functionality
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String eventNameText = eventNameField.getText().toLowerCase();
-                String venueNameText = venueNameField.getText().toLowerCase();
-                List<Event> filteredEvents = events.stream()
-                        .filter(event ->
-                                (eventNameText.isEmpty() || event.getTitle().toLowerCase().contains(eventNameText)) &&
-                                        (venueNameText.isEmpty() || event.getVenue().toLowerCase().contains(venueNameText)))
-                        .collect(Collectors.toList());
-                displayEvents(filteredEvents);
-            }
-        });
+        displayEvents(events);
 
         // Go back functionality
         goBackButton.addActionListener(new ActionListener() {
@@ -45,16 +30,12 @@ public class SearchGUI extends JFrame {
         });
 
         // Layout
-        JPanel topPanel = new JPanel();
-        topPanel.add(new JLabel("Event Name:"));
-        topPanel.add(eventNameField);
-        topPanel.add(new JLabel("Venue:"));
-        topPanel.add(venueNameField);
-        topPanel.add(searchButton);
-        topPanel.add(goBackButton);
+        JPanel buttonPanel = new JPanel();
+
+        buttonPanel.add(goBackButton);
 
         this.setLayout(new BorderLayout());
-        this.add(topPanel, BorderLayout.NORTH);
+        this.add(buttonPanel, BorderLayout.SOUTH);
         this.add(scrollPane, BorderLayout.CENTER);
 
         // JFrame settings
@@ -93,10 +74,13 @@ public class SearchGUI extends JFrame {
 
         eventPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dispose();
                 new EventDetailsGUI(event, "SearchPage",loggeduser); // Open EventDetailsPage with the selected event
             }
         });
 
         return eventPanel;
     }
+
+
 }

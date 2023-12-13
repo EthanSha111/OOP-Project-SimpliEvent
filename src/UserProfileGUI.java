@@ -4,14 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UserProfileGUI extends JFrame {
-    private UserClss loggedInUser;
+    private User loggedInUser;
     private JLabel nameLabel;
     private JLabel emailLabel;
     private JTextField nameField;
     private JTextField emailField;
     private JPasswordField passwordField;
 
-    public UserProfileGUI(UserClss loggedInUser) {
+    public UserProfileGUI(User loggedInUser) {
         this.loggedInUser = loggedInUser;
 
         // UI Components
@@ -52,7 +52,6 @@ public class UserProfileGUI extends JFrame {
 
         backToMainButton.addActionListener(e -> {
             dispose();
-            new HomeGUI(loggedInUser);
         });
 
         // Change name action
