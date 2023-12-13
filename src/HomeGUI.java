@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 public class HomeGUI extends JFrame {
     private JButton browseEventsButton;
     private JButton searchButton;
-    private JButton notificationsButton;
+    private JButton myEventsButton;
     private JButton userProfileButton;
     public JPanel mainPanel; // Main container panel
     private User loggeduser;
+
+    public static EventBook eventBook = new EventBook();
 
     public HomeGUI(User user) {
         // Initialize the main panel and set its layout
@@ -19,13 +21,13 @@ public class HomeGUI extends JFrame {
         // Initialize buttons and add action listeners
         browseEventsButton = new JButton("Browse Events");
         searchButton = new JButton("Search");
-        notificationsButton = new JButton("Notifications");
+        myEventsButton = new JButton("My Events");
         userProfileButton = new JButton("User Profile");
 
         // Add buttons to the main panel
         mainPanel.add(browseEventsButton);
         mainPanel.add(searchButton);
-        mainPanel.add(notificationsButton);
+        mainPanel.add(myEventsButton);
         mainPanel.add(userProfileButton);
 
         // Add the main panel to the JFrame
@@ -45,7 +47,13 @@ public class HomeGUI extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SearchGUI(BrowseGUI.createSampleEvents(),loggeduser); // Open the BrowsePage
+                new SearchGUI(eventBook.getEvents(),loggeduser); // Open the BrowsePage
+            }
+        });
+        myEventsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MyEventsGUI(loggeduser.getSavedEvents(),loggeduser);
             }
         });
         userProfileButton.addActionListener(new ActionListener() {

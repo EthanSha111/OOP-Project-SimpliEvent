@@ -49,8 +49,16 @@ public class User {
     }
 
     // Method to remove an event from saved events
-    public void removeSavedEvent(String event) {
+    public void removeSavedEvent(Event event) {
         this.savedEvents.remove(event);
+    }
+
+    public boolean searchSavedEvent(Event event){
+        if (this.savedEvents.contains(event)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     // Optional: Override toString for easy printing of user info
