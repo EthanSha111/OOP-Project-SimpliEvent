@@ -10,11 +10,12 @@ public class MyEventsGUI extends JFrame{
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
     private User loggeduser;
+    private JButton goBackButton;
 
     public MyEventsGUI(List<Event> events, User user){
         // UI Components
         this.loggeduser = user;
-        JButton goBackButton = new JButton("Go Back");
+        goBackButton = new JButton("Go Back");
         eventsPanel = new JPanel();
         eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
         scrollPane = new JScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

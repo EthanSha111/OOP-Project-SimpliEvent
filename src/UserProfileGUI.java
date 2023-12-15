@@ -4,12 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UserProfileGUI extends JFrame {
-    private User loggedInUser;
+    
     private JLabel nameLabel;
     private JLabel emailLabel;
     private JTextField nameField;
     private JTextField emailField;
     private JPasswordField passwordField;
+    private JButton logoutButton;
+    private JButton backToMainButton;
+    private JButton changeNameButton;
+    private JButton changeEmailButton;
+    private JButton changePasswordButton;
+
+    private User loggedInUser;
 
     public UserProfileGUI(User loggedInUser) {
         this.loggedInUser = loggedInUser;
@@ -20,11 +27,11 @@ public class UserProfileGUI extends JFrame {
         nameField = new JTextField(loggedInUser.getUsername(), 20);
         emailField = new JTextField(loggedInUser.getEmail(), 20);
         passwordField = new JPasswordField(20);
-        JButton logoutButton = new JButton("Log Out");
-        JButton backToMainButton = new JButton("Back to Main");
-        JButton changeNameButton = new JButton("Change Account Name");
-        JButton changeEmailButton = new JButton("Change Email");
-        JButton changePasswordButton = new JButton("Change Password");
+        logoutButton = new JButton("Log Out");
+        backToMainButton = new JButton("Back to Main");
+        changeNameButton = new JButton("Change Account Name");
+        changeEmailButton = new JButton("Change Email");
+        changePasswordButton = new JButton("Change Password");
 
         // Layout
         this.setLayout(new FlowLayout());
@@ -58,9 +65,7 @@ public class UserProfileGUI extends JFrame {
         changeNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loggedInUser.setUsername(nameField.getText());
-                nameLabel.setText("Account Name: " + loggedInUser.getUsername());
-                JOptionPane.showMessageDialog(UserProfileGUI.this, "Name updated successfully!");
+                changeName(loggedInUser);
                 updateAndLogout();
             }
         });
@@ -69,9 +74,7 @@ public class UserProfileGUI extends JFrame {
         changeEmailButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loggedInUser.setEmail(emailField.getText());
-                emailLabel.setText("Account Email: " + loggedInUser.getEmail());
-                JOptionPane.showMessageDialog(UserProfileGUI.this, "Email updated successfully!");
+                changeEmail(loggedInUser);
                 updateAndLogout();
             }
         });
@@ -80,8 +83,7 @@ public class UserProfileGUI extends JFrame {
         changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loggedInUser.setPassword(new String(passwordField.getPassword()));
-                JOptionPane.showMessageDialog(UserProfileGUI.this, "Password updated successfully!");
+                changePassword(loggedInUser);
                 updateAndLogout();
             }
         });
@@ -99,5 +101,22 @@ public class UserProfileGUI extends JFrame {
     private void logout() {
         dispose();
         new LoginGUI();
+    }
+
+    private void changeName(User loggedInUser){
+        loggedInUser.setUsername(nameField.getText());
+        nameLabel.setText("Account Name: " + loggedInUser.getUsername());
+        JOptionPane.showMessageDialog(UserProfileGUI.this, "Name updated successfully!");
+    }
+
+    private void changeEmail(User loggedInUser){
+        loggedInUser.setEmail(emailField.getText());
+        emailLabel.setText("Account Email: " + loggedInUser.getEmail());
+        JOptionPane.showMessageDialog(UserProfileGUI.this, "Email updated successfully!");
+    }
+
+    private void changePassword(User loggedInUser){
+        loggedInUser.setPassword(new String(passwordField.getPassword()));
+        JOptionPane.showMessageDialog(UserProfileGUI.this, "Password updated successfully!");
     }
 }
