@@ -10,6 +10,9 @@ public class BrowseGUI extends JFrame {
     private List<Event> events;
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
+    private JButton backToMainButton;
+    private JButton sortByRatingButton;
+    private JPanel buttonPanel;
 
     public static EventBook eventBook = new EventBook();
 
@@ -23,8 +26,8 @@ public class BrowseGUI extends JFrame {
         eventsPanel = new JPanel();
         eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
         scrollPane = new JScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        JButton backToMainButton = new JButton("Back to Main");
-        JButton sortByRatingButton = new JButton("Sort by Rating");
+        backToMainButton = new JButton("Back to Main");
+        sortByRatingButton = new JButton("Sort by Rating");
 
         // Add events to the panel
         displayEvents(events);
@@ -37,13 +40,13 @@ public class BrowseGUI extends JFrame {
         sortByRatingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                events.sort((event1, event2) -> Double.compare(event2.getRating(), event1.getRating()));
+                sortEvents(events);
                 displayEvents(events);
             }
         });
 
         // Layout
-        JPanel buttonPanel = new JPanel(); // Panel for buttons
+        buttonPanel = new JPanel(); // Panel for buttons
         buttonPanel.add(backToMainButton);
         buttonPanel.add(sortByRatingButton);
 
@@ -89,6 +92,10 @@ public class BrowseGUI extends JFrame {
         }
         eventsPanel.revalidate();
         eventsPanel.repaint();
+    }
+
+    private void sortEvents(List<Event> events){
+        events.sort((event1, event2) -> Double.compare(event2.getRating(), event1.getRating()));
     }
 
 }

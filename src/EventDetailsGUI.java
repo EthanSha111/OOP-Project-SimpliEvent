@@ -5,28 +5,31 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
 public class EventDetailsGUI extends JFrame {
+
     private JButton addToMyEventsButton;
     private JButton deleteFromMyEventsButton;
     private User loggeduser;
+    private JLabel titleLabel;
+    private JTextArea detailsArea;
+    private JScrollPane scrollPane;
+    private JButton backButton;
+    private JPanel buttonPanel;
+
     public EventDetailsGUI(Event event, String sourcePage, User user) {
         this.loggeduser = user;
         // Initialize UI components
-        JLabel titleLabel = new JLabel(event.getTitle());
-        JTextArea detailsArea = new JTextArea(event.getFullDetails());
+        titleLabel = new JLabel(event.getTitle());
+        detailsArea = new JTextArea(event.getFullDetails());
         detailsArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(detailsArea);
+        scrollPane = new JScrollPane(detailsArea);
 
         addToMyEventsButton = new JButton("Add to My Events");
         addToMyEventsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                if (loggeduser.searchSavedEvent(event)){ // if the event is already added
-                    JOptionPane.showMessageDialog(EventDetailsGUI.this, "Already Added to Your Events!");
-                }else{
-                    loggeduser.addSavedEvent(event);
-                    JOptionPane.showMessageDialog(EventDetailsGUI.this, "Added to Your Events!");
-                }
+                addToMyEvents(loggeduser, event);
                 dispose();
             }
         });
@@ -35,17 +38,12 @@ public class EventDetailsGUI extends JFrame {
         deleteFromMyEventsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                if (loggeduser.searchSavedEvent(event)){
-                    loggeduser.removeSavedEvent(event);
-                    JOptionPane.showMessageDialog(EventDetailsGUI.this, "Deleted from Your Events!");
-                }else{
-                    JOptionPane.showMessageDialog(EventDetailsGUI.this, "Not in Your Events!");
-                }
+                deleteFromMyEvents(loggeduser, event);
                 dispose();
             }
         });
 
-        JButton backButton = new JButton("Back");
+        backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +60,7 @@ public class EventDetailsGUI extends JFrame {
         this.add(scrollPane, BorderLayout.CENTER);
         
         // for buttons
-        JPanel buttonPanel = new JPanel();
+        buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.add(addToMyEventsButton);
         buttonPanel.add(deleteFromMyEventsButton);
@@ -74,4 +72,24 @@ public class EventDetailsGUI extends JFrame {
         this.setSize(600, 400);
         this.setVisible(true);
     }
+
+    private void addToMyEvents(User loggeduser, Event event){
+        if (loggeduser.searchSavedEvent(event)){ // if the event is already added
+            JOptionPane.showMessageDialog(EventDetailsGUI.this, "Already Added to Your Events!");
+        }else{
+            loggeduser.addSavedEvent(event);
+            JOptionPane.showMessageDialog(EventDetailsGUI.this, "Added to Your Events!");
+        }
+    }
+
+    private void deleteFromMyEvents(User loggeduser, Event event){
+        if (loggeduser.searchSavedEvent(event)){
+            loggeduser.removeSavedEvent(event);
+            JOptionPane.showMessageDialog(EventDetailsGUI.this, "Deleted from Your Events!");
+        }else{
+            JOptionPane.showMessageDialog(EventDetailsGUI.this, "Not in Your Events!");
+        }
+    }
+
+
 }
