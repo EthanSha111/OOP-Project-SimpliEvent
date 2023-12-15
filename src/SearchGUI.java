@@ -8,15 +8,24 @@ import java.util.stream.Collectors;
 public class SearchGUI extends JFrame {
     private JPanel eventsPanel;
     private JScrollPane scrollPane;
-    private User loggeduser;
+    private JTextField eventNameField;
+    private JTextField venueNameField;
+    private JButton searchButton;
+    private JButton goBackButton;
+    private JPanel topPanel;
 
-    public SearchGUI(List<Event> events, User user) {
+    private User loggeduser;
+    private List<Event> events;
+    public static EventBook eventBook = new EventBook();
+
+    public SearchGUI(User user) {
         // UI Components
+        this.events = eventBook.getEvents();
         this.loggeduser = user;
-        JTextField eventNameField = new JTextField(20);
-        JTextField venueNameField = new JTextField(20);
-        JButton searchButton = new JButton("Search");
-        JButton goBackButton = new JButton("Go Back");
+        eventNameField = new JTextField(20);
+        venueNameField = new JTextField(20);
+        searchButton = new JButton("Search");
+        goBackButton = new JButton("Go Back");
         eventsPanel = new JPanel();
         eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
         scrollPane = new JScrollPane(eventsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -25,14 +34,7 @@ public class SearchGUI extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String eventNameText = eventNameField.getText().toLowerCase();
-                String venueNameText = venueNameField.getText().toLowerCase();
-                List<Event> filteredEvents = events.stream()
-                        .filter(event ->
-                                (eventNameText.isEmpty() || event.getTitle().toLowerCase().contains(eventNameText)) &&
-                                        (venueNameText.isEmpty() || event.getVenue().toLowerCase().contains(venueNameText)))
-                        .collect(Collectors.toList());
-                displayEvents(filteredEvents);
+                displayEvents(searchEvents());
             }
         });
 
@@ -45,7 +47,7 @@ public class SearchGUI extends JFrame {
         });
 
         // Layout
-        JPanel topPanel = new JPanel();
+        topPanel = new JPanel();
         topPanel.add(new JLabel("Event Name:"));
         topPanel.add(eventNameField);
         topPanel.add(new JLabel("Venue:"));
@@ -98,5 +100,16 @@ public class SearchGUI extends JFrame {
         });
 
         return eventPanel;
+    }
+
+    private List<Event> searchEvents(){
+        String eventNameText = eventNameField.getText().toLowerCase();
+        String venueNameText = venueNameField.getText().toLowerCase();
+        List<Event> filteredEvents = events.stream()
+                .filter(event ->
+                        (eventNameText.isEmpty() || event.getTitle().toLowerCase().contains(eventNameText)) &&
+                                (venueNameText.isEmpty() || event.getVenue().toLowerCase().contains(venueNameText)))
+                .collect(Collectors.toList());
+        return filteredEvents;
     }
 }

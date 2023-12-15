@@ -47,7 +47,7 @@ public class HomeGUI extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SearchGUI(eventBook.getEvents(),loggeduser); // Open the BrowsePage
+                new SearchGUI(loggeduser); // Open the BrowsePage
             }
         });
         myEventsButton.addActionListener(new ActionListener() {

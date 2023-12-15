@@ -1,3 +1,4 @@
+import javax.imageio.plugins.jpeg.JPEGQTable;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +7,7 @@ public class LoginGUI extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private JPanel panel;
 
     public static UserBook userBook = new UserBook();
 
@@ -16,7 +18,7 @@ public class LoginGUI extends JFrame {
         loginButton = new JButton("Login");
 
         // Set layout
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(new JLabel("Username:"));
         panel.add(usernameField);
