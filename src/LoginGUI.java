@@ -37,19 +37,23 @@ public class LoginGUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                String password = new String(passwordField.getPassword());
-                if (userBook.authenticate(username, password)) {
-                    JOptionPane.showMessageDialog(LoginGUI.this, "Login Successful!");
-                    LoginGUI.this.setVisible(false); // Hide the login page
-                    User loggedInUser = userBook.getUser(username);
-                    new HomeGUI(loggedInUser); // Open UserProfilePage with the logged-in user
-                } else {
-                    JOptionPane.showMessageDialog(LoginGUI.this, "Invalid Credentials");
-                }
+                login();
             }
         });
 
+    }
+
+    private void login(){
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+        if (userBook.authenticate(username, password)) {
+            JOptionPane.showMessageDialog(LoginGUI.this, "Login Successful!");
+            LoginGUI.this.setVisible(false); // Hide the login page
+            User loggedInUser = userBook.getUser(username);
+            new HomeGUI(loggedInUser); // Open UserProfilePage with the logged-in user
+        } else {
+            JOptionPane.showMessageDialog(LoginGUI.this, "Invalid Credentials");
+        }
     }
 
 
